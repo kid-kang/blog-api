@@ -1,0 +1,26 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "博客系统后端接口：Koa2+MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kid-kang/blog-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kid-kang/blog-api/issues"
+  },
+  "homepage": "https://github.com/kid-kang/blog-api#readme",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "koa": "^2.13.4",
+    "koa-body": "^6.0.1",
+    "koa-session": "^6.2.0",
+    "koa-static": "^5.0.0"
+  }
+}
