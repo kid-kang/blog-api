@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "/1.jpg"
+    default: "/default.jpg"
   }
 }, {
   versionKey: false // 去掉数据库中的 __v 属性
