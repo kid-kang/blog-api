@@ -17,7 +17,7 @@ let opt = {
   }
 };
 
-const fileOpt = koaBody(opt);
+const mdFileOpt = koaBody(opt);
 
 const uploadMd = ctx => {
   ctx.body = {
@@ -26,4 +26,4 @@ const uploadMd = ctx => {
     mdUrl: `/md${last_path}`
   };
 };
-module.exports = { uploadMd, fileOpt };
+module.exports = { uploadMd, mdFileOpt };

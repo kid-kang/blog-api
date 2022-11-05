@@ -19,7 +19,7 @@ let opt = {
   }
 };
 
-const fileOpt = koaBody(opt);
+const avatarFileOpt = koaBody(opt);
 
 const updateAvatar = async ctx => {
   await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { avatar: last_path });
@@ -32,4 +32,4 @@ const updateAvatar = async ctx => {
   };
 };
 
-module.exports = { updateAvatar, fileOpt };
+module.exports = { updateAvatar, avatarFileOpt };
