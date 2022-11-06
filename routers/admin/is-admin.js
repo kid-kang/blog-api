@@ -8,9 +8,9 @@ const isAdmin = ctx => {
 };
 
 // 后端中间件 - 判断请求用户是否是管理员在操作
-const isAdminMiddleware = (ctx, next) => {
+const isAdminMiddleware = async (ctx, next) => {
   if (ctx.session.userInfo && ctx.session.userInfo.admin) {
-    next();
+    await next();
   } else {
     ctx.body = { code: 100, message: "您没有管理员权限" };
   }
