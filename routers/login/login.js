@@ -21,7 +21,7 @@ const setState = (ctx, userInfo) => {
   const cookieConfig = {
     domain: "localhost",
     path: '/',
-    maxAge: 36e5,
+    maxAge: 6048e5, // 七天有效期
     httpOnly: false,
     overwrite: true
   };

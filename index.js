@@ -20,7 +20,7 @@ const session = require('koa-session');
 app.keys = ['userInfo'];
 const CONFIG = {
   key: 'userInfo',
-  maxAge: 36e5, // 一小时的有效期
+  maxAge: 6048e5, // 七天的有效期
   overwrite: true,
   httpOnly: true,
   singed: true,
