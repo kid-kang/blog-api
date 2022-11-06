@@ -12,9 +12,9 @@ module.exports = async ctx => {
     }
 
     //验证用户名重名
-    let resDB = await userTable.findOne({ user });
+    let doc = await userTable.findOne({ user });
 
-    if (resDB) {
+    if (doc) {
       return ctx.body = {
         code: 100,
         message: "用户名已存在"
@@ -22,7 +22,7 @@ module.exports = async ctx => {
     }
 
     //修改数据库中该数据的用户名
-    await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { user });
+    await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { user });
 
     //更新session里存储的用户的名字
     ctx.session.userInfo.user = user;

@@ -8,16 +8,16 @@ module.exports = async ctx => {
   if (content.length > 200) return ctx.body = { code: 400, message: "内容超过200" };
 
   // 判断当前这条父评论是否存在    父级评论的作者是否存在
-  const resDB1 = await talkTable.findById(hostId);
-  if (!resDB1) return ctx.body = { code: 400, message: "hostId不存在" };
-  const resDB2 = await userTable.findById(toId);
-  if (!resDB2) return ctx.body = { code: 400, message: "toId不存在" };
+  const doc1 = await talkTable.findById(hostId);
+  if (!doc1) return ctx.body = { code: 400, message: "hostId不存在" };
+  const doc2 = await userTable.findById(toId);
+  if (!doc2) return ctx.body = { code: 400, message: "toId不存在" };
 
   await talkTable.findByIdAndUpdate(hostId, {  //往这条父评论下的children数组中添加回复数据
     $push: {
       children: {
         content,
-        author: ctx.session.userInfo._id,
+        author: ctx.session.userInfo.id,
         toId
       }
     }

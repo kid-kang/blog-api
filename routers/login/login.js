@@ -4,8 +4,8 @@ const visitorTable = require('../../mongodb/visitor');
 //添加访客
 async function addVisitor(userID) {
   //通过id查找访客数据
-  let resDB = await visitorTable.findOne({ visitor: userID });
-  if (resDB) {
+  let doc = await visitorTable.findOne({ visitor: userID });
+  if (doc) {
     //如果表中存在该id对应的访客数据，更新你的访问时间为当前时间
     await visitorTable.findOneAndUpdate({ visitor: userID }, { date: Date.now() });
 
@@ -40,8 +40,8 @@ const login = async ctx => {
 
   if (/^[a-zA-Z0-9_]{3,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
     //验证用户名和密码是否正确
-    let resDB = await userTable.findOne({ user });
-    if (!resDB) { // null ->  用户不存在
+    let doc = await userTable.findOne({ user });
+    if (!doc) { // null ->  用户不存在
       ctx.body = {
         code: 100,
         message: "用户不存在，请先注册"
@@ -49,16 +49,16 @@ const login = async ctx => {
       return;
     }
 
-    if (resDB.password === password) {
+    if (doc.password === password) {
       let userInfo = {
-        user: resDB.user,
-        _id: resDB._id,
-        photo: resDB.avatar,
-        admin: resDB.admin,
+        user: doc.user,
+        id: doc._id,
+        photo: doc.avatar,
+        admin: doc.admin,
       };
 
       setState(ctx, userInfo);
-      addVisitor(resDB._id);
+      addVisitor(doc._id);
 
       ctx.body = {
         code: 200,

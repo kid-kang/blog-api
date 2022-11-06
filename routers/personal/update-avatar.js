@@ -22,7 +22,7 @@ let opt = {
 const avatarFileOpt = koaBody(opt);
 
 const updateAvatar = async ctx => {
-  await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { avatar: last_path });
+  await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { avatar: last_path });
   ctx.session.userInfo.avatar = last_path;
 
   ctx.body = {

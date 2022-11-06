@@ -11,7 +11,7 @@ const root = async (ctx, next) => {
 };
 
 //发表留言
-const talkAbout = async ctx => {
+const addTalk = async ctx => {
   let msg = ctx.request.body.textarea.trim();
   //验证数据格式是否正确
   if (!msg || msg.length > 200) {
@@ -23,11 +23,11 @@ const talkAbout = async ctx => {
   //将评论存到数据库
   talkTable.create({
     content: msg,
-    author: ctx.session.userInfo._id  //发表这条评论的作者id
+    author: ctx.session.userInfo.id  //发表这条评论的作者id
   });
   ctx.body = {
     code: 200,
     message: "留言发表成功"
   };
 };
-module.exports = { talkAbout, root };
+module.exports = { addTalk, root };

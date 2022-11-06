@@ -9,7 +9,7 @@ const talkSchema = new Schema({
     type: Number,
     default: Date.now  //默认生成时间戳
   },
-  likes: [  //点赞数, 存所有点赞了这条评论的用户的_id
+  likes: [  //点赞数, 存所有点赞了这条评论的用户的id
     { type: Schema.Types.ObjectId }
   ],
   author: { //当前发表这条评论的用户

@@ -14,8 +14,8 @@ module.exports = async ctx => {
     }
 
     //判断旧密码 是否 和数据库里的密码一致
-    let resDB = await userTable.findById(ctx.session.userInfo._id);
-    if (resDB.password !== oldPassword) {
+    let doc = await userTable.findById(ctx.session.userInfo.id);
+    if (doc.password !== oldPassword) {
       return ctx.body = {
         code: 100,
         message: "旧密码输入不正确"
@@ -23,7 +23,7 @@ module.exports = async ctx => {
     }
 
     //到数据库中修改密码内容
-    await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { password: newPassword });
+    await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { password: newPassword });
     //销毁当前的session，因为修改密码后必须重新登录
     ctx.session = {};
     ctx.body = {

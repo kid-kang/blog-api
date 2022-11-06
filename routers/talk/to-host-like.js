@@ -10,18 +10,18 @@ module.exports = async ctx => {
     };
   }
 
-  let resDB = await talkTable.findById(hostId);
-  //判断resDB存不存在
-  if (!resDB) {
+  let doc = await talkTable.findById(hostId);
+  //判断doc存不存在
+  if (!doc) {
     return ctx.body = {
       code: 400,
       message: "hostId不存在"
     };
   }
 
-  let userId = ctx.session.userInfo._id; //当前发起请求的用Id
+  let userId = ctx.session.userInfo.id; //当前发起请求的用Id
   //判断用户是否点过赞 - 判断当前点击按钮的用户是否存在likes数组中
-  if (resDB.likes.includes(userId)) {
+  if (doc.likes.includes(userId)) {
     //存在，点过赞了，则要取消赞
     await talkTable.findByIdAndUpdate(hostId, { $pull: { likes: userId } }); //在数组中删除该用户Id
     ctx.body = {

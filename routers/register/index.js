@@ -5,8 +5,8 @@ module.exports = async ctx => {
   const { user = '', password = '' } = ctx.request.body;
   
   if (/^[a-zA-Z0-9_]{3,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
-    let resDB = await userTable.findOne({ user });
-    if (resDB) {
+    let doc = await userTable.findOne({ user });
+    if (doc) {
       //有存在相同用户数据
       ctx.body = {
         code: 100,

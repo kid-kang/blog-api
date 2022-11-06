@@ -1,7 +1,7 @@
 const talkTable = require("../../mongodb/talk");
 
 module.exports = async (ctx) => {
-  let resDB = await talkTable
+  let doc = await talkTable
     .find({}, {}, { sort: { date: -1 } })
     .populate("author", { password: 0, __v: 0, admin: 0 })
     .populate("children.author", { password: 0, __v: 0, admin: 0 }) //同时查询写子级回复的用户信息;
@@ -9,6 +9,6 @@ module.exports = async (ctx) => {
   ctx.body = {
     code: 200,
     message: "留言请求成功",
-    data: resDB
+    data: doc
   };
 };
