@@ -5,12 +5,7 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Local Run
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+node .\index.js
 ```
