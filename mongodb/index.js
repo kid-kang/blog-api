@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-let URL = 'mongodb://localhost:27017/blog'
+let URL = 'mongodb://localhost:27017/blog-new'
 //db是create方法返回的连接的数据库对象 可以控制多个数据库
 const db = mongoose.createConnection(URL, {
   useNewUrlParser: true,
