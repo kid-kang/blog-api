@@ -51,9 +51,10 @@ const login = async ctx => {
 
     if (doc.password === password) {
       let userInfo = {
+        name: doc.name,
         user: doc.user,
         id: doc._id,
-        photo: doc.avatar,
+        avatar: doc.avatar,
         admin: doc.admin,
       };
 
