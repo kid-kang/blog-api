@@ -38,7 +38,7 @@ const login = async ctx => {
   console.log("登录:", ctx.request.body);
   const { user = '', password = '' } = ctx.request.body;
 
-  if (/^[a-zA-Z0-9_]{3,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
+  if (/^[a-zA-Z0-9_]{5,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
     //验证用户名和密码是否正确
     let doc = await userTable.findOne({ user });
     if (!doc) { // null ->  用户不存在

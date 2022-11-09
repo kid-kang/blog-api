@@ -11,7 +11,7 @@ module.exports = async ctx => {
     };
   }
 
-  if (/^[a-zA-Z0-9_]{3,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
+  if (/^[a-zA-Z0-9_]{5,18}$/.test(user) && /^[a-zA-Z0-9_]{6,18}$/.test(password)) {
     let doc = await userTable.findOne({ user });
     if (doc) {
       //有存在相同用户数据
