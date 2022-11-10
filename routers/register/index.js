@@ -7,7 +7,7 @@ module.exports = async ctx => {
   if (!/([a-zA-Z0-9_]{1,16})|([\u4e00-\u9fa5]{2,8})|([a-zA-Z0-9_\u4e00-\u9fa5]{3,12})/.test(name)) {
     return ctx.body = {
       code: 100,
-      message: "昵称超出规定范围"
+      message: "昵称不符合规范"
     };
   }
 
