@@ -25,8 +25,7 @@ const setState = (ctx, userInfo) => {
     httpOnly: false,
     overwrite: true
   };
-  // userInfo.user = encodeURIComponent(userInfo.user)
-  // 后端做规则验证
+  userInfo.name = decodeURIComponent(userInfo.name)
   ctx.cookies.set('userInfo', userInfo, cookieConfig);
 
   ctx.session = {
@@ -61,6 +60,7 @@ const login = async ctx => {
       setState(ctx, userInfo);
       addVisitor(doc._id);
 
+      userInfo.name = decodeURIComponent(userInfo.name)
       ctx.body = {
         code: 200,
         message: "登陆成功",
