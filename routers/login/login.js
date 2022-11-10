@@ -54,7 +54,7 @@ const login = async ctx => {
         name: doc.name,
         user: doc.user,
         id: doc._id,
-        avatar: doc.avatar,
+        avatar: '/avatar' + doc.avatar,
         admin: doc.admin,
       };
 
