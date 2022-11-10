@@ -3,7 +3,7 @@ const register = require("./register");
 const { login, keepLogin } = require("./login/login");
 const logout = require("./login/logout");
 const avoidLogin = require("./avoid-login");
-const updateUser = require("./personal/update-user");
+const updateName = require("./personal/update-name");
 const updatePassword = require("./personal/update-password");
 const { updateAvatar, avatarFileOpt } = require("./personal/update-avatar");
 const { addTalk, root } = require("./talk/add-talk");
@@ -35,7 +35,7 @@ r.post('/login', keepLogin, login);           //登录
 r.post('/logout', logout);                    //退出登录
 r.post('/avoidLogin', avoidLogin);            //通过cookie免登录
 
-r.post('/updateUser', updateUser);                   //修改账号
+r.post('/updateName', updateName);                   //修改账号
 r.post('/updatePassword', updatePassword);           //修改密码
 r.post('/updateAvatar', avatarFileOpt, updateAvatar);//更换头像
 
