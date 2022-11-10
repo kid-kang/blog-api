@@ -1,36 +1,34 @@
 const userTable = require("../../mongodb/user");
 const { koaBody } = require('koa-body');
 const { resolve } = require('path');
+const multer = require('@koa/multer');
 const fs = require("fs");
 
 let last_path = '';
-let downloadURL = resolve(__dirname, "../../public/avatar");
 
-let opt = {
-  multipart: true,
-  encoding: "gzip",
-  formidable: {
-    maxFileSize: 1024 * 1024 * 5,
-    keepExtensions: true,   // 保持默认文件后缀名
-    onFileBegin(name, file) {
-      let lastpath = "/" + new Date().getTime() + '.jpg';
-      file.path = downloadURL + lastpath;
-
-      last_path = lastpath;
-    }
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, resolve(__dirname, "../../public/avatar"));
+  },
+  filename: function (req, file, cb) {
+    const ext = (file.originalname).split('.').pop();
+    let lastpath = new Date().getTime() + '.' + ext;
+    last_path = '/' + lastpath;
+    cb(null, lastpath);
   }
-};
-
-const avatarFileOpt = koaBody(opt);
+});
+const upload = multer({ storage });
 
 const updateAvatar = async ctx => {
-  //删除对应的文件
+  // //删除对应的文件
   const doc = await userTable.findById(ctx.session.userInfo.id);
-  const avatarPath = resolve(__dirname, "../../public/avatar") + doc.avatar;
-  fs.unlink(avatarPath, err => {
-    if (err) console.log('avatar文件:' + avatarPath + '删除失败！');
-    console.log('avatar文件:' + avatarPath + '删除成功！');
-  });
+  if (doc.avatar !== 'default.jpg') {
+    const avatarPath = resolve(__dirname, "../../public/avatar") + doc.avatar;
+    fs.unlink(avatarPath, err => {
+      if (err) console.log('avatar文件:' + avatarPath + '删除失败！');
+      else console.log('avatar文件:' + avatarPath + '删除成功！');
+    });
+  }
 
   await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { avatar: last_path });
   ctx.session.userInfo.avatar = '/avatar' + last_path;
@@ -42,4 +40,4 @@ const updateAvatar = async ctx => {
   };
 };
 
-module.exports = { updateAvatar, avatarFileOpt };
+module.exports = { updateAvatar, upload };
