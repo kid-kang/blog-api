@@ -10,7 +10,7 @@ module.exports = async ctx => {
     };
   }
 
-  if (user === ctx.session.userInfo.name) {
+  if (name === ctx.session.userInfo.name) {
     return ctx.body = {
       code: 100,
       message: "昵称一致"

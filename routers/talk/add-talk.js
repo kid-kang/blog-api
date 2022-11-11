@@ -14,7 +14,7 @@ const root = async (ctx, next) => {
 const addTalk = async ctx => {
   let msg = ctx.request.body.textarea.trim();
   //验证数据格式是否正确
-  if (!msg || msg.length > 200) {
+  if (!msg) {
     return ctx.body = {
       code: 400,
       message: "内容不符"
