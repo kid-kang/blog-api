@@ -21,7 +21,7 @@ const upload = multer({ storage });
 
 const updateAvatar = async ctx => {
   // //删除对应的文件
-  const doc = await userTable.findById(ctx.session.userInfo.id);
+  const doc = await userTable.findById(ctx.session.userInfo._id);
   if (doc.avatar !== '/default.jpg') {
     const avatarPath = resolve(__dirname, "../../public/avatar") + doc.avatar;
     fs.unlink(avatarPath, err => {
@@ -30,7 +30,7 @@ const updateAvatar = async ctx => {
     });
   }
 
-  await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { avatar: last_path });
+  await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { avatar: last_path });
   ctx.session.userInfo.avatar = '/avatar' + last_path;
 
   ctx.body = {

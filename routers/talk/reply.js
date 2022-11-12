@@ -17,7 +17,7 @@ module.exports = async ctx => {
     $push: {
       children: {
         content,
-        author: ctx.session.userInfo.id,
+        author: ctx.session.userInfo._id,
         toId
       }
     }

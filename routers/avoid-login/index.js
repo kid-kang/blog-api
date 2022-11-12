@@ -16,7 +16,7 @@ const addVisitor = async userID => {
 module.exports = ctx => {
   const data = ctx.session.userInfo;
   if (data) {
-    addVisitor(data.id);
+    addVisitor(data._id);
     ctx.body = {
       code: 200,
       message: "免登录服务生效",

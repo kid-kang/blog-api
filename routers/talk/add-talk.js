@@ -23,7 +23,7 @@ const addTalk = async ctx => {
   //将评论存到数据库
   talkTable.create({
     content: msg,
-    author: ctx.session.userInfo.id  //发表这条评论的作者id
+    author: ctx.session.userInfo._id  //发表这条评论的作者id
   });
   ctx.body = {
     code: 200,

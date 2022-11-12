@@ -18,7 +18,7 @@ module.exports = async ctx => {
   }
 
   //修改数据库中该数据的用户名
-  await userTable.findByIdAndUpdate(ctx.session.userInfo.id, { name });
+  await userTable.findByIdAndUpdate(ctx.session.userInfo._id, { name });
   //更新session里存储的用户的名字
   ctx.session.userInfo.name = name;
   ctx.body = {

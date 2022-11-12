@@ -19,7 +19,7 @@ module.exports = async ctx => {
     };
   }
 
-  let userId = ctx.session.userInfo.id; //当前发起请求的用Id
+  let userId = ctx.session.userInfo._id; //当前发起请求的用Id
   //判断用户是否点过赞 - 判断当前点击按钮的用户是否存在likes数组中
   if (doc.likes.includes(userId)) {
     //存在，点过赞了，则要取消赞

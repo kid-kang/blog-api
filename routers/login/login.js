@@ -52,7 +52,7 @@ const login = async ctx => {
       let userInfo = {
         name: doc.name,
         user: doc.user,
-        id: doc._id,
+        _id: doc._id,
         avatar: '/avatar' + doc.avatar,
         admin: doc.admin,
       };

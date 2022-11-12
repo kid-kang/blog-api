@@ -12,7 +12,7 @@ module.exports = async ctx => {
   if (!childReply) return ctx.body = { code: 400, message: "childId不存在" };
 
   //修改子评论的likes
-  const selfId = ctx.session.userInfo.id; //当前发起请求的用户的id
+  const selfId = ctx.session.userInfo._id; //当前发起请求的用户的id
   //判断用户是否点过赞
   if (childReply.likes.includes(selfId)) {
     //存在，点过赞了，要取消赞
