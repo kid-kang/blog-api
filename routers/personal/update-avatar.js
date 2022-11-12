@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     cb(null, lastpath);
   }
 });
-const upload = multer({ storage });
+const uploadAvatar = multer({ storage });
 
 const updateAvatar = async ctx => {
   // //删除对应的文件
@@ -40,4 +40,4 @@ const updateAvatar = async ctx => {
   };
 };
 
-module.exports = { updateAvatar, upload };
+module.exports = { updateAvatar, uploadAvatar };

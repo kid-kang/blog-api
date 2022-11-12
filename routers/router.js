@@ -5,7 +5,7 @@ const logout = require("./login/logout");
 const avoidLogin = require("./avoid-login");
 const updateName = require("./personal/update-name");
 const updatePassword = require("./personal/update-password");
-const { updateAvatar, upload } = require("./personal/update-avatar");
+const { updateAvatar, uploadAvatar } = require("./personal/update-avatar");
 const { addTalk, root } = require("./talk/add-talk");
 const toHostLike = require("./talk/to-host-like");
 const toChildLike = require("./talk/to-child-like");
@@ -37,7 +37,7 @@ r.post('/avoidLogin', avoidLogin);            //通过cookie免登录
 
 r.post('/updateName', updateName);                   //修改账号
 r.post('/updatePassword', updatePassword);           //修改密码
-r.post('/updateAvatar', upload.single('file'), updateAvatar);//更换头像
+r.post('/updateAvatar', uploadAvatar.single('file'), updateAvatar);//更换头像
 
 r.post('/addTalk', root, addTalk);            //新增评论留言
 r.post('/toHostLike', toHostLike);            //给host点赞
