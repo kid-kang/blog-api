@@ -8,7 +8,6 @@ module.exports = async (ctx) => {
     .populate("children.toId", { password: 0, __v: 0, admin: 0 }); //查询子级回复里存储的父级评论的用户信息
   ctx.body = {
     code: 200,
-    message: "留言请求成功",
     data: doc
   };
 };
