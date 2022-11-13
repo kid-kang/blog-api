@@ -1,7 +1,7 @@
 const talkTable = require("../../mongodb/talk");
 
 module.exports = async ctx => {
-  const { hostId } = ctx.params;
+  const { hostId } = ctx.request.body;
   // 留言存在，才进行删除
   const doc = await talkTable.findById(hostId);
   if (!doc) return ctx.body = { code: 400, message: "hostId不存在" };

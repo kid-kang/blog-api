@@ -43,8 +43,8 @@ r.post('/addTalk', root, addTalk);            //新增评论留言
 r.post('/toHostLike', toHostLike);            //给host点赞
 r.post('/toChildLike', toChildLike);          //给子评论点赞
 r.post('/reply', reply);                      //回复评论
+r.post('/deleteTalk', deleteTalk);            //删除host留言
 r.get('/getTalk', getTalk);                   //GET！留言信息响应给前端
-r.get('/deleteTalk/:hostId', deleteTalk);     //DELETE! 删除host留言
 
 
 r.post('/isAdmin', isAdmin);                                     //判断是否是管理员

@@ -24,8 +24,7 @@ module.exports = ctx => {
     };
   } else {
     ctx.body = {
-      code: 400,
-      message: "请登录",
+      code: 400
     };
   }
 };
