@@ -1,5 +1,4 @@
 const userTable = require("../../mongodb/user");
-const { koaBody } = require('koa-body');
 const { resolve } = require('path');
 const multer = require('@koa/multer');
 const fs = require("fs");
@@ -17,7 +16,7 @@ const storage = multer.diskStorage({
     cb(null, lastpath);
   }
 });
-const uploadAvatar = multer({ storage });
+const uploadAvatarOpt = multer({ storage });
 
 const updateAvatar = async ctx => {
   // //删除对应的文件
@@ -40,4 +39,4 @@ const updateAvatar = async ctx => {
   };
 };
 
-module.exports = { updateAvatar, uploadAvatar };
+module.exports = { updateAvatar, uploadAvatarOpt };

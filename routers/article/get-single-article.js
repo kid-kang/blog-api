@@ -8,5 +8,5 @@ module.exports = async ctx => {
   //设置readingNum字段值自增1 -> $inc 自增
   await articleTable.findByIdAndUpdate(id, { $inc: { readingNum: 1 } });
 
-  ctx.body = { code: 200, message: "成功获取文章详情", data: doc };
+  ctx.body = { code: 200, data: doc };
 };

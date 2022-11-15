@@ -4,11 +4,12 @@ const { URL } = require("url");
 module.exports = async ctx => {
   //数据格式的校验： 鉴定各字段是否为空;  鉴定2个home是否为home的格式
 
-  let { origin } = new URL(ctx.request.body.home);
-  //根据正则匹配查询home字段值里有没有同一个网站的友链
-  let doc = await friendsLinkTable.findOne({ home: new RegExp(origin) });
-  if (doc) return ctx.body = { code: 100, message: "请不要重复添加相同网站下的友链！" };
+  try {
+    new URL(ctx.request.body.home); // 检查url是否符合规范
 
-  await friendsLinkTable.create(ctx.request.body);
-  ctx.body = { code: 200, message: "添加友链成功" };
+    await friendsLinkTable.create(ctx.request.body);
+    ctx.body = { code: 200, message: "添加友链成功" };
+  } catch (error) {
+    ctx.body = { code: 400, message: "无效URL" };
+  }
 };

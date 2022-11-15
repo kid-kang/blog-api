@@ -3,17 +3,19 @@ const { resolve } = require('path');
 const fs = require("fs");
 
 module.exports = async ctx => {
-  const { id } = ctx.params;
+  const { id } = ctx.request.body;
 
   //删除对应的文件
   const doc = await articleTable.findById(id);
-  const coverPath = resolve(__dirname, "../../public/cover") + doc.coverUrl;
-  const mdPath = resolve(__dirname, "../../public/md") + doc.mdUrl;
+  const coverPath = resolve(__dirname, "../../public") + doc.coverUrl;
+  const mdPath = resolve(__dirname, "../../public") + doc.mdUrl;
 
-  fs.unlink(coverPath, err => {
-    if (err) console.log('cover文件:' + coverPath + '删除失败！');
-    console.log('cover文件:' + coverPath + '删除成功！');
-  });
+  if (doc.coverUrl !== "/cover/default.jpg") {
+    fs.unlink(coverPath, err => {
+      if (err) console.log('cover文件:' + coverPath + '删除失败！');
+      else console.log('cover文件:' + coverPath + '删除成功！');
+    });
+  }
   fs.unlink(mdPath, err => {
     if (err) console.log('md文件:' + mdPath + '删除失败！');
     console.log('md文件:' + mdPath + '删除成功！');
