@@ -35,7 +35,7 @@ r.post('/login', keepLogin, login);           //登录
 r.post('/logout', logout);                    //退出登录
 r.post('/avoidLogin', avoidLogin);            //通过cookie免登录
 
-r.post('/updateName', updateName);                   //修改账号
+r.post('/updateName', updateName);                   //修改昵称
 r.post('/updatePassword', updatePassword);           //修改密码
 r.post('/updateAvatar', uploadAvatarOpt.single('file'), updateAvatar);//更换头像
 
