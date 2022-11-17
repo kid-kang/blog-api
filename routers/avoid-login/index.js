@@ -6,7 +6,7 @@ const addVisitor = async userID => {
   let doc = await visitorTable.findOne({ visitor: userID });
   if (doc) {
     //如果表中存在该id对应的访客数据，更新你的访问时间为当前时间
-    await visitorTable.findOneAndUpdate({ visitor: userID }, { data: Date.now() });
+    await visitorTable.findOneAndUpdate({ visitor: userID }, { date: Date.now() });
   } else {
     //如果表中不存在该访客数据，添加访客到表中
     await visitorTable.create({ visitor: userID });
