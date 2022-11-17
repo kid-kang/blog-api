@@ -1,8 +1,9 @@
 const Koa = require('koa');
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
 const app = new Koa;
+
+
+const history = require('koa-connect-history-api-fallback');
+app.use(history());
 
 const cors = require('@koa/cors');
 app.use(cors({
@@ -45,12 +46,16 @@ app
   .listen(3300);
 
 // 根据项目的路径导入生成的证书文件
+const fs = require('fs');
+const path = require('path');
 const privateKey = fs.readFileSync(path.join(__dirname, './certificate/private.key'), 'utf8');
 const certificate = fs.readFileSync(path.join(__dirname, './certificate/certificate.pem'), 'utf8');
 const credentials = {
   key: privateKey,
   cert: certificate,
 };
+
+const https = require('https');
 const httpsServer = https.createServer(credentials, app.callback());
 // 设置https的访问端口号
 const SSLPORT = 3301;
