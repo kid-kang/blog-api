@@ -1,10 +1,6 @@
 const Koa = require('koa');
 const app = new Koa;
 
-
-const history = require('koa-connect-history-api-fallback');
-app.use(history());
-
 const cors = require('@koa/cors');
 app.use(cors({
   // origin: "http://localhost:8080",
