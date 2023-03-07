@@ -1,23 +1,20 @@
-const Koa = require('koa');
-const app = new Koa;
+const Koa = require('koa')
+const app = new Koa
 
-const cors = require('@koa/cors');
-app.use(cors({
-  // origin: "http://localhost:8080",
-  credentials: true
-}));
+const cors = require('@koa/cors')
+app.use(cors({ credentials: true }))
 
-const { koaBody } = require('koa-body');
-app.use(koaBody());
+const { koaBody } = require('koa-body')
+app.use(koaBody())
 
-const koaStatic = require('koa-static');
-app.use(koaStatic("./public"));
+const koaStatic = require('koa-static')
+app.use(koaStatic("./public"))
 
-const router = require("./routers/router");
+const router = require("./routers/router")
 
 //提前配置好session
-const session = require('koa-session');
-app.keys = ['userInfo'];
+const session = require('koa-session')
+app.keys = ['userInfo']
 const CONFIG = {
   key: 'userInfo',
   maxAge: 6048e5, // 七天的有效期
@@ -25,18 +22,18 @@ const CONFIG = {
   httpOnly: true,
   singed: true,
   rolling: true,
-};
+}
 
 // 处理类似404请求
 app.use(async (ctx, next) => {
-  await next();
+  await next()
   if (ctx.status >= 400) {
-    ctx.body = ctx.status;
+    ctx.body = ctx.status
   }
-});
+})
 
 app
   .use(session(CONFIG, app))
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3300);
+  .listen(3300)
